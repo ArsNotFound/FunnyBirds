@@ -1,4 +1,4 @@
-package ru.samsung.itschool.mdev.funnybirds;
+package ru.samsung.itschool.mdev.funnybirds.game;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,10 +8,11 @@ import android.graphics.Rect;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class Sprite {
     private Bitmap bitmap;
 
-    private List<Rect> frames;
+    private final List<Rect> frames;
     private int frameWidth;
     private int frameHeight;
     private int currentFrame;
@@ -24,14 +25,14 @@ public class Sprite {
     private double velocityX;
     private double velocityY;
 
-    private int padding;
+    private final int padding;
 
     public Sprite(double x,
                   double y,
                   double velocityX,
                   double velocityY,
                   Rect initialFrame,
-                  Bitmap bitmap)     {
+                  Bitmap bitmap) {
 
         this.x = x;
         this.y = y;
@@ -40,7 +41,7 @@ public class Sprite {
 
         this.bitmap = bitmap;
 
-        this.frames = new ArrayList<Rect>();
+        this.frames = new ArrayList<>();
         this.frames.add(initialFrame);
 
         this.bitmap = bitmap;
@@ -108,7 +109,7 @@ public class Sprite {
     }
 
     public void setCurrentFrame(int currentFrame) {
-        this.currentFrame = currentFrame%frames.size();
+        this.currentFrame = currentFrame % frames.size();
     }
 
     public double getFrameTime() {
@@ -116,7 +117,7 @@ public class Sprite {
     }
 
     public void setFrameTime(double frameTime) {
-        this.frameTime = Math.abs(frameTime);;
+        this.frameTime = Math.abs(frameTime);
     }
 
     public double getTimeForCurrentFrame() {
@@ -127,16 +128,15 @@ public class Sprite {
         this.timeForCurrentFrame = Math.abs(timeForCurrentFrame);
     }
 
-    public void addFrame (Rect frame) {
+    public void addFrame(Rect frame) {
         frames.add(frame);
     }
 
-    public int getFramesCount () {
+    public int getFramesCount() {
         return frames.size();
     }
 
-
-    public void update (int ms) {
+    public void update(int ms) {
         timeForCurrentFrame += ms;
 
         if (timeForCurrentFrame >= frameTime) {
@@ -144,26 +144,25 @@ public class Sprite {
             timeForCurrentFrame = timeForCurrentFrame - frameTime;
         }
 
-        x = x + velocityX * ms/1000.0;
-        y = y + velocityY * ms/1000.0;
+        x = x + velocityX * ms / 1000.0;
+        y = y + velocityY * ms / 1000.0;
     }
-    public void draw (Canvas canvas) {
+
+    public void draw(Canvas canvas) {
         Paint p = new Paint();
 
-        Rect destination = new Rect((int)x, (int)y, (int)(x + frameWidth), (int)(y + frameHeight));
-        canvas.drawBitmap(bitmap, frames.get(currentFrame), destination,  p);
+        Rect destination = new Rect((int) x, (int) y, (int) (x + frameWidth), (int) (y + frameHeight));
+        canvas.drawBitmap(bitmap, frames.get(currentFrame), destination, p);
     }
 
-    public Rect getBoundingBoxRect () {
-        return new Rect((int)x+padding,
-                (int)y+padding,
-                (int)(x + frameWidth - 2 *padding),
-                (int)(y + frameHeight - 2* padding));
+    public Rect getBoundingBoxRect() {
+        return new Rect((int) x + padding,
+                (int) y + padding,
+                (int) (x + frameWidth - 2 * padding),
+                (int) (y + frameHeight - 2 * padding));
     }
 
-
-    public boolean intersect (Sprite s) {
+    public boolean intersect(Sprite s) {
         return getBoundingBoxRect().intersect(s.getBoundingBoxRect());
     }
-
 }

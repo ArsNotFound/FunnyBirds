@@ -11,6 +11,8 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
 
+import ru.samsung.itschool.mdev.funnybirds.game.Sprite;
+
 public class GameView extends View {
 
     private Sprite playerBird;
