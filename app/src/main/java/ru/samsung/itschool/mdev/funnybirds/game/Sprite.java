@@ -136,7 +136,7 @@ public class Sprite {
         return frames.size();
     }
 
-    public void update(int ms) {
+    public void update(long ms) {
         timeForCurrentFrame += ms;
 
         if (timeForCurrentFrame >= frameTime) {

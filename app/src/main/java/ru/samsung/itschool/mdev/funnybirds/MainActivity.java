@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import ru.samsung.itschool.mdev.funnybirds.game.GameView;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
