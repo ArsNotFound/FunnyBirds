@@ -1,19 +1,21 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.application)
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    compileSdkVersion = 34
+    buildToolsVersion = "34.0.0"
+
+    namespace "ru.samsung.itschool.mdev.funnybirds"
 
     defaultConfig {
-        applicationId "ru.samsung.itschool.mdev.funnybirds"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId = "ru.samsung.itschool.mdev.funnybirds"
+        minSdk = 26
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -22,18 +24,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.constraintLayout
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation libs.junit
+
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
 }
